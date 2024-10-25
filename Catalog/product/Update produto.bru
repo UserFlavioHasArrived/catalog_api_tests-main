@@ -1,0 +1,22 @@
+meta {
+  name: Update produto
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{host}}/products/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"fast n furious",
+    "description":"carros e corridas",
+    "price":100,
+    "imgUrl":"localhost/img",
+    "date":"2024-10-25T19:45:00.00+03:00"
+    
+  }
+}

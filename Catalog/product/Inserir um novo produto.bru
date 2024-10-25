@@ -1,0 +1,22 @@
+meta {
+  name: Inserir um novo produto
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/products
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"fast n furious two",
+    "description":"carros e corridas",
+    "price":100,
+    "imgUrl":"localhost/img",
+    "date":"2024-10-25T19:45:00.00+03:00"
+    
+  }
+}

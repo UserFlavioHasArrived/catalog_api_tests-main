@@ -1,0 +1,17 @@
+meta {
+  name: Update categoria
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{host}}/categories/3
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"Computadores"
+  }
+}
