@@ -58,7 +58,7 @@ public class Product {
 		this.id = id;
 	}
 
-	public String getName() {
+	public Product getName() {
 		return name;
 	}
 
