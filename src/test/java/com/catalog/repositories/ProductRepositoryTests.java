@@ -51,13 +51,25 @@ public class ProductRepositoryTests {
         //update deveria modifica e persistir os dados quando o id existir
         //preparar os dados
         Product product = new Product(1L,"phone","Smartphone", 1200.00, "imgProduto", Instant.now());
-        //executar a  ação
+        //executar a ação
         product.setName("Update Phone");
         product.setPrice(1500.00);
         product = repository.save(product);
         //verificar se ocorreu como o esperado
+        Assertions.assertEquals("Update Phone",product.getName());
 
     }
+@Test
+    public void findByIdShowuldReturnNonEmptyOptionalWhenExists(){
+    //preparar os dados
+    long existingId = 1L;
+    //executar a ação
+    Optional<Product> result = repository.findById(existingId);
+    //certificar se deu certo
+    //verificar se ocorreu como o esperado
+    Assertions.assertTrue(result.isPresent());
 
+
+}
 
 }
