@@ -1,8 +1,8 @@
 package com.catalog.repositories;
 
 import com.catalog.entities.Product;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.time.Instant;
 import java.util.Optional;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 public class ProductRepositoryTests {
@@ -19,32 +19,45 @@ public class ProductRepositoryTests {
 
     @Test
     public void deleteShouldDeleteObjectWhenIdExists(){
+        //deletar deveria delatar objeto quando ele existir
         //preparar os dados
-        long existingid = 1L;
-        //executar os dados
-        repository.deleteById(existingid);
+        long existingId = 1L;
+        //executar a ação
+        repository.deleteById(existingId);
         //verificar se realmente deletou
-        Optional<Product> result = repository.findById(existingid);
-        //testa se o objeto esta presente
-        Assertions.assertFalse( result.isPresent());
-
+        Optional<Product> result = repository.findById(existingId);
+        //testa se o objeto está presente
+        Assertions.assertFalse(result.isPresent());
     }
-@Test
-    public void testSaveProject(){
+
+    @Test
+    public void testSaveProduct(){
         Product product = new Product();
         product.setName("Test Product");
-        product.setDescription("trestando");
-        product.setPrice(400.00);
+        product.setDescription("testando");
+        product.setPrice(5000.00);
         product.setImgUrl("localhost/image");
-        product.setDate(Instant.parse("2024-10-25T21:21:000+03:00"));
-        //salvar produto
-    Product savedProduct = repository.save(product);
-    //Asserts são para certificar se tudo deu certo
-    assertThat(savedProduct).isNotNull(); //verfifica se é não nulo
-    assertThat(savedProduct.getName()).isEqualTo( "Test Product");
+        //product.setDate(Instant.parse("2024-10-25T19:44:00.00+03:00"));
+        //salvar o produto
+        Product savedProduct = repository.save(product);
+        //Asserts são para certificar se tudo deu certo
+        assertThat(savedProduct).isNotNull();//verifica se é não nulo
+        assertThat(savedProduct.getName()).isEqualTo("Test Product");
+    }
+
+    @Test
+    @DisplayName("")
+    public void updateShouldChangeAndPersistDataWhenIdWxists(){
+        //update deveria modifica e persistir os dados quando o id existir
+        //preparar os dados
+        Product product = new Product(1L,"phone","Smartphone", 1200.00, "imgProduto", Instant.now());
+        //executar a  ação
+        product.setName("Update Phone");
+        product.setPrice(1500.00);
+        product = repository.save(product);
+        //verificar se ocorreu como o esperado
+
+    }
+
 
 }
-
-
-}
-
